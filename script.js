@@ -1,9 +1,10 @@
-//navbar change on scroll
+// Navbar scroll style
 window.addEventListener("scroll", () => {
-  const navbar = document.querySelector(".navbar");
-  if (window.scrollY > 10) {
-    navbar.classList.add("scrolled");
-  } else {
-    navbar.classList.remove("scrolled");
-  }
+  document.querySelector(".navbar")
+    .classList.toggle("scrolled", window.scrollY > 10);
+});
+
+// Theme toggle (switch hero gradient + keep everything minimal)
+document.getElementById("themeToggle").addEventListener("click", () => {
+  document.body.classList.toggle("theme-alt");
 });
