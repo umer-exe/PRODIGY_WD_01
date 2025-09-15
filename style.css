@@ -1,90 +1,76 @@
-/*basestyles*/
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
+/* Base */
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
   font-family: Arial, sans-serif;
-  line-height: 1.6;
+  line-height:1.6;
+  background:#faf5ff;            /* very light lilac page bg */
+  color:#1f1f1f;
 }
 
-/*navbar*/
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 40px;
-  background-color: transparent;
-  color: white;
-  transition: background-color 0.3s ease;
-  z-index: 1000;
+/*navbar */
+.navbar{
+  position:fixed; top:0; left:0; width:100%;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:20px 56px;              /* wider/taller */
+  background:rgba(129, 94, 234, 0.12); /* faint lilac tint so it stands out even at top */
+  backdrop-filter:saturate(150%) blur(2px);
+  transition:background-color .3s ease, box-shadow .3s ease, padding .3s ease;
+  z-index:1000;
+  border-bottom:1px solid rgba(129,94,234,0.15);
+}
+.navbar.scrolled{
+  background:#4b0082;            /* deep purple on scroll */
+  box-shadow:0 6px 18px rgba(75,0,130,.35); /* strong separation */
+  border-bottom-color:transparent;
+}
+.logo{
+  font-size:1.35rem; font-weight:800; letter-spacing:.3px;
+  color:#d8b4fe;                  /* lilac */
+}
+.nav-links{list-style:none; display:flex; gap:24px}
+.nav-links a{
+  text-decoration:none; color:#fff; font-weight:700;
+  transition:color .25s ease, opacity .25s ease;
+}
+.nav-links a:hover{ color:#e9d5ff; }
+
+/* her, lighter grdient */
+.hero{
+  min-height:100vh;
+  display:flex; flex-direction:column; justify-content:center; align-items:center;
+  text-align:center; padding:0 20px;
+  color:#fff;
+  background:linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%); /* lighter purple/lilac */
 }
 
-.navbar.scrolled {
-  background-color: rgba(75, 0, 130, 0.9); /*deep purple on scroll*/
+/* Sections */
+.content{
+  padding:96px 20px;
+  max-width:900px; margin:0 auto;
+  background:#fff;
+  border-radius:14px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.06);
+  margin-top:48px;
+  text-align:center;
+}
+.content h2{
+  color:#4b0082;
+  margin-bottom:12px;
 }
 
-.logo {
-  font-size: 1.3rem;
-  font-weight: bold;
-  color: #d8b4fe; /*lilac logo text for test*/
+/* Social buttons */
+.social-links{margin-top:20px}
+.btn{
+  display:inline-block;
+  background:#6d28d9;            /* purple */
+  color:#fff; text-decoration:none;
+  padding:10px 20px; border-radius:8px; margin:5px;
+  font-weight:700; transition:transform .15s ease, background .25s ease, color .25s ease, border-color .25s ease;
 }
+.btn:hover{ background:#8b5cf6; transform:translateY(-1px) }
 
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 20px;
+.btn-outline{
+  background:transparent; color:#6d28d9; border:2px solid #6d28d9;
 }
-
-.nav-links a {
-  text-decoration: none;
-  color: white;
-  font-weight: bold;
-  transition: color 0.3s ease;
-}
-
-.nav-links a:hover {
-  color: #d8b4fe; /*lilac hover effect for test*/
-}
-
-/*hero sec*/
-.hero {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(to right, #4b0082, #8a2be2); /*purple gradient*/
-  color: white;
-  text-align: center;
-  padding: 0 20px;
-}
-
-.hero h1 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
-}
-
-.hero p {
-  font-size: 1.2rem;
-  color: #e9d5ff; /*soft lilac text*/
-}
-
-/*content sec*/
-.content {
-  padding: 80px 20px;
-  max-width: 800px;
-  margin: auto;
-  text-align: center;
-}
-
-.content h2 {
-  color: #4b0082; /*deep purple section heading*/
-  margin-bottom: 15px;
-}
+.btn-outline:hover{ color:#fff; background:#6d28d9; }
