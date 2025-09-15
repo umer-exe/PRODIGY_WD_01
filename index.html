@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Responsive Landing Page</title>
 
-  <!-- Clean, modern font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <!-- Modern, crisp font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -16,12 +16,17 @@
       <ul class="nav-links">
         <li><a href="https://github.com/umer-exe" target="_blank" rel="noopener">Projects</a></li>
         <li>
-          <!-- Theme switcher -->
-          <label class="switch" title="Toggle theme">
-            <input type="checkbox" id="themeCheckbox" />
-            <span class="slider"></span>
-            <span class="switch-label">Theme</span>
-          </label>
+          <!-- Modern icon toggle -->
+          <button id="themeToggle" class="icon-btn" aria-label="Toggle theme" aria-pressed="false">
+            <!-- Sun icon -->
+            <svg class="sun" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Zm0-16a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1Zm0 18a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0v-1a1 1 0 0 1 1-1Zm10-9a1 1 0 0 1-1 1h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 1 1ZM4 12a1 1 0 0 1-1 1H2a1 1 0 1 1 0-2h1a1 1 0 0 1 1 1Zm14.95 6.364a1 1 0 0 1-1.414 1.414l-.707-.707a1 1 0 1 1 1.414-1.414l.707.707ZM6.464 6.464A1 1 0 1 1 5.05 5.05l.707-.707A1 1 0 0 1 7.17 5.758l-.707.707Zm11.314-2.121a1 1 0 0 1 0 1.414l-.707.707a1 1 0 0 1-1.414-1.414l.707-.707a1 1 0 0 1 1.414 0ZM7.171 18.243a1 1 0 0 1-1.414 1.414l-.707-.707a1 1 0 1 1 1.414-1.414l.707.707Z"/>
+            </svg>
+            <!-- Moon icon -->
+            <svg class="moon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 1 0 9.79 9.79Z"/>
+            </svg>
+          </button>
         </li>
       </ul>
     </nav>
@@ -32,7 +37,7 @@
     <p>Scroll down to see the navbar style change!</p>
   </section>
 
-
+  <!-- Minimal strip: only links -->
   <section id="about" class="about">
     <a href="https://github.com/umer-exe" target="_blank" rel="noopener" class="btn">GitHub</a>
     <a href="https://linkedin.com/in/umer-malik28" target="_blank" rel="noopener" class="btn btn-outline">LinkedIn</a>

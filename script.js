@@ -4,18 +4,20 @@ window.addEventListener("scroll", () => {
     .classList.toggle("scrolled", window.scrollY > 10);
 });
 
-// Theme toggle with persistence
-const checkbox = document.getElementById("themeCheckbox");
+// Theme toggle with persistence + proper ARIA state
+const toggleBtn = document.getElementById("themeToggle");
+const applyTheme = (t) => {
+  const dark = t === "dark";
+  document.body.classList.toggle("theme-dark", dark);
+  toggleBtn.setAttribute("aria-pressed", String(dark));
+  localStorage.setItem("theme", dark ? "dark" : "light");
+};
 
 // Load saved theme
-const saved = localStorage.getItem("theme");
-if (saved === "alt") {
-  document.body.classList.add("theme-alt");
-  checkbox.checked = true;
-}
+applyTheme(localStorage.getItem("theme") || "light");
 
-checkbox.addEventListener("change", () => {
-  const alt = checkbox.checked;
-  document.body.classList.toggle("theme-alt", alt);
-  localStorage.setItem("theme", alt ? "alt" : "default");
+// Click to toggle
+toggleBtn.addEventListener("click", () => {
+  const next = document.body.classList.contains("theme-dark") ? "light" : "dark";
+  applyTheme(next);
 });
