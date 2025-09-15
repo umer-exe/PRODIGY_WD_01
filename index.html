@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Responsive Landing Page</title>
+
+  <!-- Clean, modern font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -12,7 +15,14 @@
       <a href="#home" class="logo">umer-exe</a>
       <ul class="nav-links">
         <li><a href="https://github.com/umer-exe" target="_blank" rel="noopener">Projects</a></li>
-        <li><button id="themeToggle" class="linklike" type="button">Theme</button></li>
+        <li>
+          <!-- Theme switcher -->
+          <label class="switch" title="Toggle theme">
+            <input type="checkbox" id="themeCheckbox" />
+            <span class="slider"></span>
+            <span class="switch-label">Theme</span>
+          </label>
+        </li>
       </ul>
     </nav>
   </header>
@@ -22,7 +32,7 @@
     <p>Scroll down to see the navbar style change!</p>
   </section>
 
-  <!-- Minimal strip: only links, tiny height -->
+
   <section id="about" class="about">
     <a href="https://github.com/umer-exe" target="_blank" rel="noopener" class="btn">GitHub</a>
     <a href="https://linkedin.com/in/umer-malik28" target="_blank" rel="noopener" class="btn btn-outline">LinkedIn</a>
