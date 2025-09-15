@@ -1,4 +1,4 @@
-//change navbar color on scroll
+//navbar change on scroll
 window.addEventListener("scroll", () => {
   const navbar = document.querySelector(".navbar");
   if (window.scrollY > 50) {

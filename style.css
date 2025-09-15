@@ -1,76 +1,65 @@
-/* Base */
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
+/*base*/
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
   font-family: Arial, sans-serif;
-  line-height:1.6;
-  background:#faf5ff;            /* very light lilac page bg */
-  color:#1f1f1f;
+  line-height: 1.6;
+  background: #f8f5ff;            /* light page bg */
+  color: #1f1f1f;
 }
 
 /*navbar */
-.navbar{
-  position:fixed; top:0; left:0; width:100%;
-  display:flex; justify-content:space-between; align-items:center;
-  padding:20px 56px;              /* wider/taller */
-  background:rgba(129, 94, 234, 0.12); /* faint lilac tint so it stands out even at top */
-  backdrop-filter:saturate(150%) blur(2px);
-  transition:background-color .3s ease, box-shadow .3s ease, padding .3s ease;
-  z-index:1000;
-  border-bottom:1px solid rgba(129,94,234,0.15);
+.navbar {
+  position: fixed; top: 0; left: 0; width: 100%;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 22px 56px;              /* a bit taller/wider */
+  background: rgba(129, 94, 234, 0.12); /* visible even at top */
+  backdrop-filter: saturate(150%) blur(2px);
+  border-bottom: 1px solid rgba(129, 94, 234, 0.18);
+  transition: background-color .3s ease, box-shadow .3s ease, padding .3s ease, border-color .3s ease;
+  z-index: 1000;
 }
-.navbar.scrolled{
-  background:#4b0082;            /* deep purple on scroll */
-  box-shadow:0 6px 18px rgba(75,0,130,.35); /* strong separation */
-  border-bottom-color:transparent;
+.navbar.scrolled {
+  background: #4b0082;            /* deep purple */
+  box-shadow: 0 6px 18px rgba(75, 0, 130, .35);
+  border-bottom-color: transparent;
 }
-.logo{
-  font-size:1.35rem; font-weight:800; letter-spacing:.3px;
-  color:#d8b4fe;                  /* lilac */
+.logo { font-size: 1.35rem; font-weight: 800; color: #d8b4fe; }
+.nav-links { list-style: none; display: flex; gap: 24px; }
+.nav-links a {
+  text-decoration: none; color: #fff; font-weight: 700;
+  transition: color .25s ease, opacity .25s ease;
 }
-.nav-links{list-style:none; display:flex; gap:24px}
-.nav-links a{
-  text-decoration:none; color:#fff; font-weight:700;
-  transition:color .25s ease, opacity .25s ease;
-}
-.nav-links a:hover{ color:#e9d5ff; }
+.nav-links a:hover { color: #e9d5ff; }
 
-/* her, lighter grdient */
-.hero{
-  min-height:100vh;
-  display:flex; flex-direction:column; justify-content:center; align-items:center;
-  text-align:center; padding:0 20px;
-  color:#fff;
-  background:linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%); /* lighter purple/lilac */
+/* hero w lighter gradient*/
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  text-align: center; padding: 0 20px; color: #fff;
+  /* lighter lilac/purple gradient */
+  background: linear-gradient(135deg, #9b5de5 0%, #c4b5fd 55%, #e9d5ff 100%);
 }
 
-/* Sections */
-.content{
-  padding:96px 20px;
-  max-width:900px; margin:0 auto;
-  background:#fff;
-  border-radius:14px;
-  box-shadow:0 6px 20px rgba(0,0,0,0.06);
-  margin-top:48px;
-  text-align:center;
+/* Section card */
+.content {
+  padding: 96px 20px;
+  max-width: 900px; margin: 48px auto 96px;
+  background: #fff; text-align: center;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
 }
-.content h2{
-  color:#4b0082;
-  margin-bottom:12px;
-}
+.content h2 { color: #4b0082; margin-bottom: 8px; }
 
 /* Social buttons */
-.social-links{margin-top:20px}
-.btn{
-  display:inline-block;
-  background:#6d28d9;            /* purple */
-  color:#fff; text-decoration:none;
-  padding:10px 20px; border-radius:8px; margin:5px;
-  font-weight:700; transition:transform .15s ease, background .25s ease, color .25s ease, border-color .25s ease;
+.social-links { margin-top: 18px; }
+.btn {
+  display: inline-block;
+  background: #6d28d9; color: #fff; text-decoration: none;
+  padding: 10px 20px; border-radius: 8px; margin: 6px;
+  font-weight: 700;
+  transition: transform .15s ease, background .25s ease, color .25s ease, border-color .25s ease;
 }
-.btn:hover{ background:#8b5cf6; transform:translateY(-1px) }
-
-.btn-outline{
-  background:transparent; color:#6d28d9; border:2px solid #6d28d9;
-}
-.btn-outline:hover{ color:#fff; background:#6d28d9; }
+.btn:hover { background: #8b5cf6; transform: translateY(-1px); }
+.btn-outline { background: transparent; color: #6d28d9; border: 2px solid #6d28d9; }
+.btn-outline:hover { color: #fff; background: #6d28d9; }
