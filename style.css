@@ -95,16 +95,17 @@ body {
 .nav-links a:hover { color:var(--underline); }
 .nav-links a:hover::after { transform:scaleX(1); }
 
-/* Dropdown menu - cleaned up */
+/* Dropdown menu - cleaned up + spacing fix */
 .dropdown {
   position: relative;
+  margin-right: 12px; /* creates space between Projects and the toggle button */
 }
 
 .dropdown-content {
   display: none;
   position: absolute;
-  top: calc(100% + 8px); /* Small gap below Projects */
-  right: 0; /* Align neatly with right edge of parent */
+  top: calc(100% + 8px); /* gap below Projects */
+  right: 10px; /* slight left shift so it doesn't overlap the toggle */
   background: var(--nav-scrolled);
   min-width: 180px;
   padding: 6px 0;
