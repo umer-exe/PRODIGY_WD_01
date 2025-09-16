@@ -33,14 +33,14 @@ if (hero) {
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    // move the spotlight
+    // spotlight position
     hero.style.setProperty("--mx", x + "px");
     hero.style.setProperty("--my", y + "px");
 
-    // subtle tilt based on cursor position
+    // tilt amounts
     const px = x / rect.width;   // 0..1
     const py = y / rect.height;  // 0..1
-    const maxTilt = 3;           // degrees (kept tiny so it stays classy)
+    const maxTilt = 3;           // degrees
     const ry = clamp((0.5 - px) * maxTilt * 2, -maxTilt, maxTilt); // rotateY
     const rx = clamp((py - 0.5) * maxTilt * 2, -maxTilt, maxTilt); // rotateX
 
@@ -55,7 +55,6 @@ if (hero) {
   hero.addEventListener("mousemove", handleMove);
 
   hero.addEventListener("mouseleave", () => {
-    // reset to center/flat
     hero.style.setProperty("--mx", "50%");
     hero.style.setProperty("--my", "50%");
     hero.style.setProperty("--rx", "0deg");

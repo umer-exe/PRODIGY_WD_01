@@ -98,14 +98,14 @@ body {
 /* Dropdown menu - cleaned up + spacing fix */
 .dropdown {
   position: relative;
-  margin-right: 12px; /* creates space between Projects and the toggle button */
+  margin-right: 12px; /* space from theme toggle */
 }
 
 .dropdown-content {
   display: none;
   position: absolute;
   top: calc(100% + 8px); /* gap below Projects */
-  right: 10px; /* slight left shift so it doesn't overlap the toggle */
+  right: 10px; /* shift left so it doesn't overlap the toggle */
   background: var(--nav-scrolled);
   min-width: 180px;
   padding: 6px 0;
@@ -169,7 +169,37 @@ body.theme-dark .icon-btn .moon { opacity:1; transform:scale(1) rotate(0); }
   padding:0 20px;
   color:#fff;
   background:linear-gradient(135deg,var(--hero-from) 0%, var(--hero-mid) 55%, var(--hero-to) 100%);
+
+  /* Interactive hover base */
+  position: relative;
+  overflow: hidden;
+  will-change: transform;
+  transition: transform .2s ease;
 }
+
+/* Interactive hero overlay (spotlight) */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .25s ease;
+  background:
+    radial-gradient(600px circle at var(--mx,50%) var(--my,50%),
+      rgba(255,255,255,.18), rgba(255,255,255,0) 45%),
+    radial-gradient(900px circle at var(--mx,50%) var(--my,50%),
+      rgba(255,255,255,.06), rgba(255,255,255,0) 60%);
+  mix-blend-mode: overlay;
+}
+
+.hero:hover::before { opacity: 1; }
+
+/* gentle 3D tilt; include perspective so effect is visible */
+.hero.is-tilting {
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(1.01);
+}
+
 .hero h1 { font-size:2.6rem; letter-spacing:.2px; }
 .hero p { opacity:.95; }
 
@@ -197,38 +227,3 @@ body.theme-dark .icon-btn .moon { opacity:1; transform:scale(1) rotate(0); }
 .btn:hover { background:var(--btn-hover); transform:translateY(-1px); }
 .btn.btn-outline { background:transparent; color:var(--btn); border:2px solid var(--btn); }
 .btn.btn-outline:hover { color:#fff; background:var(--btn); }
-
-
-/* --- Interactive hero hover (spotlight + gentle tilt) --- */
-.hero {
-  position: relative;            /* needed for the overlay */
-  overflow: hidden;              /* hide overlay edges */
-  will-change: transform;
-  transition: transform .2s ease;
-}
-
-/* soft radial spotlight that follows the cursor */
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: -20%; /* extend beyond edges for smoother movement */
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity .25s ease;
-  /* spotlight + airy shine ring */
-  background:
-    radial-gradient(600px circle at var(--mx,50%) var(--my,50%),
-      rgba(255,255,255,.18), rgba(255,255,255,0) 45%)
-    ,
-    radial-gradient(900px circle at var(--mx,50%) var(--my,50%),
-      rgba(255,255,255,.06), rgba(255,255,255,0) 60%);
-  mix-blend-mode: overlay; /* lets it glow nicely on your gradient */
-}
-
-/* show the glow on hover */
-.hero:hover::before { opacity: 1; }
-
-/* teeny 3D tilt on hover */
-.hero.is-tilting {
-  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(1.01);
-}
