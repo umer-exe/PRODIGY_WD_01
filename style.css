@@ -197,3 +197,38 @@ body.theme-dark .icon-btn .moon { opacity:1; transform:scale(1) rotate(0); }
 .btn:hover { background:var(--btn-hover); transform:translateY(-1px); }
 .btn.btn-outline { background:transparent; color:var(--btn); border:2px solid var(--btn); }
 .btn.btn-outline:hover { color:#fff; background:var(--btn); }
+
+
+/* --- Interactive hero hover (spotlight + gentle tilt) --- */
+.hero {
+  position: relative;            /* needed for the overlay */
+  overflow: hidden;              /* hide overlay edges */
+  will-change: transform;
+  transition: transform .2s ease;
+}
+
+/* soft radial spotlight that follows the cursor */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -20%; /* extend beyond edges for smoother movement */
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .25s ease;
+  /* spotlight + airy shine ring */
+  background:
+    radial-gradient(600px circle at var(--mx,50%) var(--my,50%),
+      rgba(255,255,255,.18), rgba(255,255,255,0) 45%)
+    ,
+    radial-gradient(900px circle at var(--mx,50%) var(--my,50%),
+      rgba(255,255,255,.06), rgba(255,255,255,0) 60%);
+  mix-blend-mode: overlay; /* lets it glow nicely on your gradient */
+}
+
+/* show the glow on hover */
+.hero:hover::before { opacity: 1; }
+
+/* teeny 3D tilt on hover */
+.hero.is-tilting {
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(1.01);
+}
