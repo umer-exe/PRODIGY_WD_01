@@ -1,64 +1,89 @@
-// Navbar scroll style
-window.addEventListener("scroll", () => {
-  document.querySelector(".navbar")
-    .classList.toggle("scrolled", window.scrollY > 10);
+// Navbar scroll effect
+const navbar = document.querySelector('.navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 50);
 });
 
-// Theme toggle with persistence + proper ARIA state
-const toggleBtn = document.getElementById("themeToggle");
-const applyTheme = (t) => {
-  const dark = t === "dark";
-  document.body.classList.toggle("theme-dark", dark);
-  toggleBtn.setAttribute("aria-pressed", String(dark));
-  localStorage.setItem("theme", dark ? "dark" : "light");
+// Keep CSS var in sync with actual navbar height
+const setNavVars = () => {
+  const navH = navbar ? navbar.getBoundingClientRect().height : 80;
+  document.documentElement.style.setProperty('--nav-h', `${navH}px`);
 };
+setNavVars();
+window.addEventListener('resize', setNavVars);
 
-// Load saved theme
-applyTheme(localStorage.getItem("theme") || "light");
+// Theme toggle
+const themeToggle = document.getElementById('themeToggle');
+const body = document.body;
 
-// Click to toggle
-toggleBtn.addEventListener("click", () => {
-  const next = document.body.classList.contains("theme-dark") ? "light" : "dark";
-  applyTheme(next);
+const savedTheme = localStorage.getItem('theme') || 'dark';
+if (savedTheme === 'light') body.classList.add('light-theme');
+
+themeToggle.addEventListener('click', () => {
+  body.classList.toggle('light-theme');
+  const currentTheme = body.classList.contains('light-theme') ? 'light' : 'dark';
+  localStorage.setItem('theme', currentTheme);
 });
 
-// --- Interactive hero hover (spotlight + gentle tilt) ---
-const hero = document.querySelector(".hero");
+// Mobile menu toggle
+const menuToggle = document.getElementById('menuToggle');
+const navLinks = document.querySelector('.nav-links');
 
-if (hero) {
-  const clamp = (n, min, max) => Math.max(min, Math.min(n, max));
+menuToggle.addEventListener('click', () => {
+  menuToggle.classList.toggle('active');
+  navLinks.classList.toggle('active');
+});
 
-  const handleMove = (e) => {
-    const rect = hero.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    // spotlight position
-    hero.style.setProperty("--mx", x + "px");
-    hero.style.setProperty("--my", y + "px");
-
-    // tilt amounts
-    const px = x / rect.width;   // 0..1
-    const py = y / rect.height;  // 0..1
-    const maxTilt = 3;           // degrees
-    const ry = clamp((0.5 - px) * maxTilt * 2, -maxTilt, maxTilt); // rotateY
-    const rx = clamp((py - 0.5) * maxTilt * 2, -maxTilt, maxTilt); // rotateX
-
-    hero.style.setProperty("--rx", rx.toFixed(3) + "deg");
-    hero.style.setProperty("--ry", ry.toFixed(3) + "deg");
-  };
-
-  hero.addEventListener("mouseenter", () => {
-    hero.classList.add("is-tilting");
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    menuToggle.classList.remove('active');
+    navLinks.classList.remove('active');
   });
+});
 
-  hero.addEventListener("mousemove", handleMove);
-
-  hero.addEventListener("mouseleave", () => {
-    hero.style.setProperty("--mx", "50%");
-    hero.style.setProperty("--my", "50%");
-    hero.style.setProperty("--rx", "0deg");
-    hero.style.setProperty("--ry", "0deg");
-    hero.classList.remove("is-tilting");
+// Scroll animation observer
+const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
   });
-}
+}, observerOptions);
+
+// Ensure anything already on-screen at load gets the visible class
+const animatedEls = document.querySelectorAll('.fade-in, .project-card, .contact-form');
+animatedEls.forEach(el => {
+  observer.observe(el);
+  if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('visible');
+});
+
+// Contact form handling
+const contactForm = document.getElementById('contactForm');
+const formMessage = document.getElementById('formMessage');
+
+contactForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const message = document.getElementById('message').value.trim();
+
+  if (name && email && message) {
+    formMessage.textContent = "Message sent successfully! I'll get back to you soon.";
+    formMessage.className = 'form-message success';
+    formMessage.style.display = 'block';
+    contactForm.reset();
+    setTimeout(() => { formMessage.style.display = 'none'; }, 5000);
+  } else {
+    formMessage.textContent = 'Please fill in all fields.';
+    formMessage.className = 'form-message error';
+    formMessage.style.display = 'block';
+  }
+});
+
+// Parallax effect for hero (capped so it doesn't collide with Projects)
+window.addEventListener('scroll', () => {
+  const hero = document.querySelector('.hero');
+  if (!hero) return;
+  const y = Math.min(window.pageYOffset * 0.3, 60); // cap at ~60px
+  hero.style.transform = `translateY(${y}px)`;
+});
